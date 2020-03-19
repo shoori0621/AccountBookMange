@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountBookMange", "AccountBookMange\AccountBookMange.csproj", "{6A77B0F0-2BEF-4888-921E-165FFC1276F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvidor", "DatabaseProvidor\DatabaseProvidor.csproj", "{34B7C4FB-D40F-4EAB-B752-0FE2A27AE545}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvidor", "DatabaseProvidor\DatabaseProvidor.csproj", "{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6A77B0F0-2BEF-4888-921E-165FFC1276F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A77B0F0-2BEF-4888-921E-165FFC1276F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A77B0F0-2BEF-4888-921E-165FFC1276F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34B7C4FB-D40F-4EAB-B752-0FE2A27AE545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34B7C4FB-D40F-4EAB-B752-0FE2A27AE545}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34B7C4FB-D40F-4EAB-B752-0FE2A27AE545}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34B7C4FB-D40F-4EAB-B752-0FE2A27AE545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
