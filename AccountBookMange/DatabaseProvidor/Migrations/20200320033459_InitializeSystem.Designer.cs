@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseProvidor.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20200319094952_InitializeMigration")]
-    partial class InitializeMigration
+    [Migration("20200320033459_InitializeSystem")]
+    partial class InitializeSystem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,10 @@ namespace DatabaseProvidor.Migrations
 
                     b.Property<string>("Comment")
                         .HasColumnName("comment")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EndDate")
+                        .HasColumnName("end_date")
                         .HasColumnType("TEXT");
 
                     b.Property<long?>("MovePrice")

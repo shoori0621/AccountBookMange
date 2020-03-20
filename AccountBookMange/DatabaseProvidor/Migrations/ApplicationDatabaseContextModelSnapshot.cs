@@ -111,6 +111,10 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("comment")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EndDate")
+                        .HasColumnName("end_date")
+                        .HasColumnType("TEXT");
+
                     b.Property<long?>("MovePrice")
                         .HasColumnName("move_price")
                         .HasColumnType("INTEGER");

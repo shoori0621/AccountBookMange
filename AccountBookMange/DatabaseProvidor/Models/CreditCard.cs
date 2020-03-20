@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DatabaseProvidor.Accesses;
 
 namespace DatabaseProvidor.Models
 {
     [Table("credit_card")]
-    public class CreditCard
+    public class CreditCard : ModelBase
     {
         /// <summary>ID</summary>
         [Column("id")]
@@ -35,8 +38,85 @@ namespace DatabaseProvidor.Models
 
         public CreditCard(long id, long userId)
         {
-            this.Id = id;
-            this.UserId = userId;
+            this.FindByKey(id, userId);
+        }
+
+        /// <summary>
+        /// 登録・更新
+        /// </summary>
+        public void Upsert()
+        {
+            using (var context = new ApplicationDatabaseContext())
+            {
+                if (!this.IsValuable)
+                {
+                    //未登録の場合登録
+                    context.CreditCards.Add(this);
+                }
+                else
+                {
+                    //更新処理
+                    var data = context.CreditCards.Single(x => x.Id == this.Id && x.UserId == this.UserId);
+
+                    data.Name = this.Name;
+                }
+
+                context.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// 論理削除
+        /// </summary>
+        public void Remove()
+        {
+            using (var context = new ApplicationDatabaseContext())
+            {
+                if (!this.IsValuable)
+                {
+                    var data = context.CreditCards.Single(x => x.Id == this.Id && x.UserId == this.UserId);
+
+                    data.DeleteFlag = 1;
+                }
+
+                context.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// 一意取得
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        public void FindByKey(long id, long userId)
+        {
+            using (var context = new ApplicationDatabaseContext())
+            {
+                var creditCard = context.CreditCards.Single(x => x.Id == id && x.UserId == userId);
+                if (creditCard != null)
+                {
+                    this.Id = creditCard.Id;
+                    this.UserId = creditCard.UserId;
+                    this.Name = creditCard.Name;
+                    this.DeleteFlag = creditCard.DeleteFlag;
+
+                    this.IsValuable = true;
+                }
+
+                context.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// N件取得　ユーザIDが条件
+        /// </summary>
+        /// <param name="creditCard"></param>
+        public List<CreditCard> FindByUserId(long userId)
+        {
+            using (var context = new ApplicationDatabaseContext())
+            {
+                return context.CreditCards.Where(x => x.UserId == userId).ToList();
+            }
         }
     }
 }

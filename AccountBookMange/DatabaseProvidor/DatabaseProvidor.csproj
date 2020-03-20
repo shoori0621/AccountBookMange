@@ -154,21 +154,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accesses\ApplicationDatabaseContext.cs" />
-    <Compile Include="Migrations\20200319094952_InitializeMigration.cs" />
-    <Compile Include="Migrations\20200319094952_InitializeMigration.designer.cs">
-      <DependentUpon>20200319094952_InitializeMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20200320033459_InitializeSystem.cs" />
+    <Compile Include="Migrations\20200320033459_InitializeSystem.designer.cs">
+      <DependentUpon>20200320033459_InitializeSystem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDatabaseContextModelSnapshot.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Income.cs" />
+    <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Move.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AccountBookManage.db" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

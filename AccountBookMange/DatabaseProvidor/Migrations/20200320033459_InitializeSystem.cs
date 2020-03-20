@@ -2,7 +2,7 @@
 
 namespace DatabaseProvidor.Migrations
 {
-    public partial class InitializeMigration : Migration
+    public partial class InitializeSystem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,6 +62,7 @@ namespace DatabaseProvidor.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     user_id = table.Column<long>(nullable: true),
                     start_date = table.Column<string>(nullable: true),
+                    end_date = table.Column<string>(nullable: true),
                     pre_account_id = table.Column<long>(nullable: true),
                     next_account_id = table.Column<long>(nullable: true),
                     move_price = table.Column<long>(nullable: true),

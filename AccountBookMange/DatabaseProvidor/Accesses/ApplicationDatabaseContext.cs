@@ -25,7 +25,7 @@ namespace DatabaseProvidor.Accesses
             var connectionString =
                 new SqliteConnectionStringBuilder
                 {
-                    DataSource = @"C:\Users\tetsumoto\Documents\05.Lern\01.C#\prism\AccountBookManage\AccountBookMange\DatabaseProvidor\AccountBookManage.db"
+                    DataSource = @"E:\C#\AccountBookManage\AccountBookMange\DatabaseProvidor\AccountBookManage.db" 
                 }.ToString();
 
             optionsBuilder.UseSqlite(new SqliteConnection(connectionString));
