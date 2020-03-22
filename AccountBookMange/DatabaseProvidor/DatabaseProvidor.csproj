@@ -169,6 +169,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AccountBookManage.db" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
