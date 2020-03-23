@@ -155,7 +155,7 @@ namespace DatabaseProvidor.Models
         /// N件取得　ユーザIDが条件
         /// </summary>
         /// <param name="creditCard"></param>
-        public List<CreditCard> FindByUserId(long userId)
+        public static List<CreditCard> FindByUserId(long userId)
         {
             using (var context = new ApplicationDatabaseContext())
             {

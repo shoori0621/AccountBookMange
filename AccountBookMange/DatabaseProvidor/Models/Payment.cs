@@ -240,11 +240,11 @@ namespace DatabaseProvidor.Models
         /// N件取得　ユーザIDが条件
         /// </summary>
         /// <param name="payment"></param>
-        public List<Payment> FindByUserId(long userId)
+        public static List<Payment> FindByUserId(long userId)
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                return context.Payments.Where(x => x.UserId == userId).ToList();
+                return context.Payments.Where(x => x.UserId == userId).OrderByDescending(x => x.PaymentDate).ToList();
             }
         }
     }

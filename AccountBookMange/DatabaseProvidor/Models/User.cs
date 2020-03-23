@@ -174,7 +174,7 @@ namespace DatabaseProvidor.Models
         /// 全件取得
         /// </summary>
         /// <param name="user"></param>
-        public List<User> FindAll()
+        public static List<User> FindAll()
         {
             using (var context = new ApplicationDatabaseContext())
             {

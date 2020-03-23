@@ -207,11 +207,11 @@ namespace DatabaseProvidor.Models
         /// N件取得　ユーザIDが条件
         /// </summary>
         /// <param name="income"></param>
-        public List<Income> FindByUserId(long userId)
+        public static List<Income> FindByUserId(long userId)
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                return context.Incomes.Where(x => x.UserId == userId).ToList();
+                return context.Incomes.Where(x => x.UserId == userId).OrderByDescending(x => x.IncomeDate).ToList();
             }
         }
     }

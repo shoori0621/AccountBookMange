@@ -159,7 +159,7 @@ namespace DatabaseProvidor.Models
         /// N件取得　ユーザIDが条件
         /// </summary>
         /// <param name="account"></param>
-        public List<Account> FindByUserId(long userId)
+        public static List<Account> FindByUserId(long userId)
         {
             using(var context = new ApplicationDatabaseContext())
             {

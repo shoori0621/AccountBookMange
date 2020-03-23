@@ -222,11 +222,11 @@ namespace DatabaseProvidor.Models
         /// N件取得　ユーザIDが条件
         /// </summary>
         /// <param name="income"></param>
-        public List<Move> FindByUserId(long userId)
+        public static List<Move> FindByUserId(long userId)
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                return context.Moves.Where(x => x.UserId == userId).ToList();
+                return context.Moves.Where(x => x.UserId == userId).OrderByDescending(x => x.StartDate).ToList();
             }
         }
        
