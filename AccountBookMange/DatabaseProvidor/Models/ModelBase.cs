@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseProvidor.Models
 {
-    public class ModelBase
+    public class ModelBase : Prism.Mvvm.BindableBase
     {
         /// <summary>DBの実データ</summary>
         protected bool IsValuable { get; set; }        

@@ -2,10 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ri="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.NET46"
         xmlns:fontawesome="http://schemas.fontawesome.io/icons/"
         xmlns:vm="clr-namespace:AccountBookMange.ViewModels"
         prism:ViewModelLocator.AutoWireViewModel="True"        
         Title="{Binding Title}" Height="600" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <ri:EventToReactiveCommand Command="{Binding Loaded}"/>
+        </i:EventTrigger>    
+    </i:Interaction.Triggers>
+    
     <StackPanel Orientation="Horizontal" Margin="5">
         <StackPanel Orientation="Vertical" Width="200">
             <StackPanel Orientation="Horizontal">
@@ -13,23 +21,33 @@
                 <TextBlock Text="〇〇太郎" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
 
-            <TreeView ItemsSource="{Binding Menus}">
+            <TreeView ItemsSource="{Binding MenuItems}" Height="500" Width="200" Margin="0,10,0,0" BorderThickness="0">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded.Value, Mode=TwoWay}"/>
+                        <Setter Property="IsSelected" Value="{Binding IsSelected.Value, Mode=TwoWay}"/>
+                    </Style>
+                </TreeView.Resources>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate 
-                        DataType="{x:Type vm:MainWindowViewModel}"
+                        DataType="{x:Type vm:MenuItemViewModel}"
                         ItemsSource="{Binding Children}">
                         <StackPanel Orientation="Horizontal">
-                            <fontawesome:FontAwesome Icon="{Binding Icon.Value}"/>
-                            <TextBlock Text="{Binding MenuTitle.Value}"/>
+                            <fontawesome:FontAwesome Icon="{Binding Icon.Value}" Width="35" Height="35" FontSize="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding MenuTitle.Value}" VerticalAlignment="Center" Padding="5,0"/>
                         </StackPanel>
                         
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <ri:EventToReactiveCommand Command="{Binding SelectedItemChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TreeView>
         </StackPanel>
-
-        <ContentControl 
-            Margin="10,0,0,0"
-            prism:RegionManager.RegionName="ContentRegion" />
+        <ContentControl prism:RegionManager.RegionName="EditorArea" Margin="10,0,0,0"/>
+        
     </StackPanel>
 </Window>

@@ -3,6 +3,8 @@ using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
 
+using EditorViews;
+
 namespace AccountBookMange
 {
     /// <summary>
@@ -18,6 +20,11 @@ namespace AccountBookMange
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<EditorViewsModule>();
         }
     }
 }

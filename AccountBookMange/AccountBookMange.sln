@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountBookMange", "Account
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvidor", "DatabaseProvidor\DatabaseProvidor.csproj", "{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorViews", "EditorViews\EditorViews.csproj", "{61B87609-0D45-440C-927B-4AAF9C947698}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB61FF3-81A0-4A71-967F-DEE64E0110DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B87609-0D45-440C-927B-4AAF9C947698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B87609-0D45-440C-927B-4AAF9C947698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B87609-0D45-440C-927B-4AAF9C947698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B87609-0D45-440C-927B-4AAF9C947698}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

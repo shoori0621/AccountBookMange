@@ -15,24 +15,68 @@ namespace DatabaseProvidor.Models
     [Table("credit_card")]
     public class CreditCard : ModelBase
     {
+        private long id;
         /// <summary>ID</summary>
         [Column("id")]
         [Key]
         [Required]
-        public long Id { get; set; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                SetProperty(ref id, value);
+            }
+        }
 
+        private long userId;
         /// <summary>ユーザID</summary>
         [Column("user_id")]
         [Required]
-        public long UserId { get; set; }
+        public long UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                SetProperty(ref userId, value);
+            }
+        }
 
+        private string name;
         /// <summary>カード名</summary>
         [Column("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                SetProperty(ref name, value);
+            }
+        }
 
+        private long? deleteFlag;
         /// <summary>削除フラグ</summary>
         [Column("delete_flag")]
-        public long? DeleteFlag { get; set; }
+        public long? DeleteFlag
+        {
+            get
+            {
+                return deleteFlag;
+            }
+            set
+            {
+                SetProperty(ref deleteFlag, value);
+            }
+        }
 
         public CreditCard() { }
 

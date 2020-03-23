@@ -15,35 +15,113 @@ namespace DatabaseProvidor.Models
     [Table("income")]
     public class Income : ModelBase
     {
+        private long id;
         /// <summary>ID</summary>
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Required]
-        public long Id { get; set; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                SetProperty(ref id, value);
+            }
+        }
 
+        private long? userId;
         /// <summary>ユーザID</summary>
         [Column("user_id")]
-        public long? UserId { get; set; }
+        public long? UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                SetProperty(ref userId, value);
+            }
+        }
 
+        private string incomeDate;
         /// <summary>入金日</summary>
         [Column("income_date")]        
-        public string IncomeDate { get; set; }
+        public string IncomeDate
+        {
+            get
+            {
+                return incomeDate;
+            }
+            set
+            {
+                SetProperty(ref incomeDate, value);
+            }
+        }
 
+        private long? incomeKind;
         /// <summary>入金区分</summary>
         [Column("income_kind")]
-        public long? IncomeKind { get; set; }
+        public long? IncomeKind
+        {
+            get
+            {
+                return incomeKind;
+            }
+            set
+            {
+                SetProperty(ref incomeKind, value);
+            }
+        }
 
+        private long? incomePrice;
         /// <summary>入金額</summary>
         [Column("income_price")]
-        public long? IncomePrice { get; set; }
+        public long? IncomePrice
+        {
+            get
+            {
+                return incomePrice;
+            }
+            set
+            {
+                SetProperty(ref incomePrice, value);
+            }
+        }
 
+        private long? accountId;
         /// <summary>口座ID</summary>
         [Column("account_id")]
-        public long? AccountId { get; set; }
+        public long? AccountId
+        {
+            get
+            {
+                return accountId;
+            }
+            set
+            {
+                SetProperty(ref accountId, value);
+            }
+        }
 
+        private string comment;
+        /// <summary>備考</summary>
         [Column("comment")]
-        public string Comment { get; set; }
+        public string Comment
+        {
+            get
+            {
+                return comment;
+            }
+            set
+            {
+                SetProperty(ref comment, value);
+            }
+        }
 
         public Income() { }
 

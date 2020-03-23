@@ -15,28 +15,83 @@ namespace DatabaseProvidor.Models
     [Table("user")]
     public class User : ModelBase
     {
+        private long id;
         /// <summary>ユーザID</summary>
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Required]        
-        public long Id { get; set; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                SetProperty(ref id, value);
+            }
+        }
 
+        private string name;
         /// <summary>ユーザ名</summary>
         [Column("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                SetProperty(ref name, value);
+            }
+        }
 
+        private string account;
         /// <summary>アカウント名</summary>
         [Column("account")]
-        public string Account { get; set; }
+        public string Account
+        {
+            get
+            {
+                return account;
+            }
+            set
+            {
+                SetProperty(ref account, value);
+            }
+        }
 
+        private string password;
         /// <summary>パスワード</summary>
         [Column("password")]
-        public string Password { get; set; }
-         
+        public string Password
+        {
+            get
+            {
+                return password;
+            }
+            set
+            {
+                SetProperty(ref password, value);
+            }
+        }
+
+        private long? deleteFlag;
         /// <summary>削除フラグ</summary>
         [Column("delete_flag")]
-        public long? DeleteFlag { get; set; }
+        public long? DeleteFlag
+        {
+            get
+            {
+                return deleteFlag;
+            }
+            set
+            {
+                SetProperty(ref deleteFlag, value);
+            }
+        }
 
         public User() { }
 

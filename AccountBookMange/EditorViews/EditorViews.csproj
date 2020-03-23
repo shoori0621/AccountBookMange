@@ -4,20 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A77B0F0-2BEF-4888-921E-165FFC1276F5}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{61B87609-0D45-440C-927B-4AAF9C947698}</ProjectGuid>
+    <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AccountBookMange</RootNamespace>
-    <AssemblyName>AccountBookMange</AssemblyName>
+    <RootNamespace>EditorViews</RootNamespace>
+    <AssemblyName>EditorViews</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,28 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Constatns\MenuItem.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\MenuItemCreator.cs" />
-    <Compile Include="ViewModels\MenuItemViewModel.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="EditorViewsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -87,34 +63,76 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\IncomeEditorViewModel.cs" />
+    <Compile Include="ViewModels\LoginMenuViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MoveEditorViewModel.cs" />
+    <Compile Include="ViewModels\PaymentEditorViewModel.cs" />
+    <Compile Include="ViewModels\UserEditorViewModel.cs" />
+    <Compile Include="ViewModels\UserMasterViewModel.cs" />
+    <Compile Include="Views\IncomeEditor.xaml.cs">
+      <DependentUpon>IncomeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginMenu.xaml.cs">
+      <DependentUpon>LoginMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MoveEditor.xaml.cs">
+      <DependentUpon>MoveEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentEditor.xaml.cs">
+      <DependentUpon>PaymentEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserEditor.xaml.cs">
+      <DependentUpon>UserEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserMaster.xaml.cs">
+      <DependentUpon>UserMaster.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="document\【Prism】家計簿管理システム.xlsx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FontAwesome.WPF">
-      <Version>4.7.0.9</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Unity" Version="7.2.0.1422" />
-    <PackageReference Include="ReactiveProperty">
-      <Version>6.2.0</Version>
-    </PackageReference>
+    <Page Include="Views\IncomeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MoveEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaymentEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserMaster.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseProvidor\DatabaseProvidor.csproj">
-      <Project>{0cb61ff3-81a0-4a71-967f-dee64e0110df}</Project>
-      <Name>DatabaseProvidor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EditorViews\EditorViews.csproj">
-      <Project>{61b87609-0d45-440c-927b-4aaf9c947698}</Project>
-      <Name>EditorViews</Name>
-    </ProjectReference>
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1367" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

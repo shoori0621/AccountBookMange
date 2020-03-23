@@ -15,39 +15,127 @@ namespace DatabaseProvidor.Models
     [Table("move")]
     public class Move : ModelBase
     {
+        private long id;
         /// <summary>ID</summary>
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Required]        
-        public long Id { get; set; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                SetProperty(ref id, value);
+            }
+        }
 
+        private long? userId;
         /// <summary>ユーザID</summary>
         [Column("user_id")]
-        public long? UserId { get; set; }
+        public long? UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                SetProperty(ref userId, value);
+            }
+        }
 
+        private string startDate;
         /// <summary>移動開始日</summary>
         [Column("start_date")]
-        public string StartDate { get; set; }
+        public string StartDate
+        {
+            get
+            {
+                return startDate;
+            }
+            set
+            {
+                SetProperty(ref startDate, value);
+            }
+        }
 
+        private string endDate;
         /// <summary>移動完了日</summary>
         [Column("end_date")]
-        public string EndDate { get; set; }
+        public string EndDate
+        {
+            get
+            {
+                return endDate;
+            }
+            set
+            {
+                SetProperty(ref endDate, value);
+            }
+        }
 
+        private long? preAccountId;
         /// <summary>移動元口座ID</summary>
         [Column("pre_account_id")]
-        public long? PreAccountId { get; set; }
+        public long? PreAccountId
+        {
+            get
+            {
+                return preAccountId;
+            }
+            set
+            {
+                SetProperty(ref preAccountId, value);
+            }
+        }
 
+        private long? nextAccountId;
         /// <summary>移動先口座ID</summary>
         [Column("next_account_id")]
-        public long? NextAccountId { get; set; }
+        public long? NextAccountId
+        {
+            get
+            {
+                return nextAccountId;
+            }
+            set
+            {
+                SetProperty(ref nextAccountId, value);
+            }
+        }
 
+        private long? movePrice;
         /// <summary>金額</summary>
         [Column("move_price")]
-        public long? MovePrice { get; set; }
+        public long? MovePrice
+        {
+            get
+            {
+                return nextAccountId;
+            }
+            set
+            {
+                SetProperty(ref nextAccountId, value);
+            }
+        }
 
+        private string comment;
         [Column("comment")]
-        public string Comment { get; set; }
+        public string Comment
+        {
+            get
+            {
+                return comment;
+            }
+            set
+            {
+                SetProperty(ref comment, value);
+            }
+        }
 
         public Move() { }
 

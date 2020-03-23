@@ -15,43 +15,142 @@ namespace DatabaseProvidor.Models
     [Table("payment")]
     public class Payment : ModelBase
     {
+        private long id;
         /// <summary>ID</summary>
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Required]
-        public long Id { get; set; }
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                SetProperty(ref id, value);
+            }
+        }
 
+        private long? userId;
         /// <summary>ユーザID</summary>
         [Column("user_id")]
-        public long? UserId { get; set; }
+        public long? UserId
+        {
+            get
+            {
+                return userId;
+            }
+            set
+            {
+                SetProperty(ref userId, value);
+            }
+        }
 
+        private string paymentDate;
         /// <summary>支払日</summary>
         [Column("payment_date")]
-        public string PaymentDate { get; set; }
+        public string PaymentDate
+        {
+            get
+            {
+                return paymentDate;
+            }
+            set
+            {
+                SetProperty(ref paymentDate, value);
+            }
+        }
 
+        private long? paymentPrice;
         /// <summary>支払額</summary>
         [Column("payment_price")]
-        public long? PaymentPrice { get; set; }
+        public long? PaymentPrice
+        {
+            get
+            {
+                return paymentPrice;
+            }
+            set
+            {
+                SetProperty(ref paymentPrice, value);
+            }
+        }
 
+        private long? paymentKind;
         /// <summary>支払区分</summary>
         [Column("payment_kind")]
-        public long? PaymentKind { get; set; }
+        public long? PaymentKind
+        {
+            get
+            {
+                return paymentKind;
+            }
+            set
+            {
+                SetProperty(ref paymentKind, value);
+            }
+        }
 
+        private long? paymentWay;
         /// <summary>支払方法</summary>
         [Column("payment_way")]
-        public long? PaymentWay { get; set; }
+        public long? PaymentWay
+        {
+            get
+            {
+                return paymentWay;
+            }
+            set
+            {
+                SetProperty(ref paymentWay, value);
+            }
+        }
 
+        private long? accountId;
         /// <summary>口座ID</summary>
         [Column("account_id")]
-        public long? AccountId { get; set; }
+        public long? AccountId
+        {
+            get
+            {
+                return accountId;
+            }
+            set
+            {
+                SetProperty(ref accountId, value);
+            }
+        }
 
+        private long? cardId;
         /// <summary>クレジットカードID</summary>
         [Column("card_id")]
-        public long? CardId { get; set; }
+        public long? CardId
+        {
+            get
+            {
+                return cardId;
+            }
+            set
+            {
+                SetProperty(ref cardId, value);
+            }
+        }
 
+        private string comment;
         [Column("comment")]
-        public string Comment { get; set; }
+        public string Comment
+        {
+            get
+            {
+                return comment;
+            }
+            set
+            {
+                SetProperty(ref comment, value);
+            }
+        }
 
         public Payment() { }
 
