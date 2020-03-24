@@ -262,6 +262,12 @@ namespace DatabaseProvidor.Models
                     this.Comment = move.Comment;
 
                     this.IsValuable = true;
+
+                    context.Entry(move).Reference(x => x.PreAccount).Load();
+                    context.Entry(move).Reference(x => x.NextAccount).Load();
+
+                    this.PreAccount = move.PreAccount;
+                    this.NextAccount = move.NextAccount;
                 }
 
                 context.SaveChangesAsync();

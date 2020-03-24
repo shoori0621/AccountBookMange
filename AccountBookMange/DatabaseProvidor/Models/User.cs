@@ -94,10 +94,15 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        [ForeignKey("id")]
         public ObservableCollection<Income> Incomes { get; set; }
+        [ForeignKey("id")]
         public ObservableCollection<Payment> Payments { get; set; }
+        [ForeignKey("id")]
         public ObservableCollection<Move> Moves { get; set; }
+        [ForeignKey("id")]
         public ObservableCollection<Account> Accounts { get; set; }
+        [ForeignKey("id")]
         public ObservableCollection<CreditCard> CreditCards { get; set; }
 
         public User()
@@ -176,11 +181,19 @@ namespace DatabaseProvidor.Models
                     this.DeleteFlag = user.DeleteFlag;
 
                     this.IsValuable = true;
-                }
 
-                //this.Incomes = new ObservableCollection<Income>(context.Incomes);
-                //this.Payments = new ObservableCollection<Payment>(context.Payments);
-                //this.Moves = new ObservableCollection<Move>(context.Moves);
+                    context.Entry(user).Collection(x => x.Incomes).Load();
+                    context.Entry(user).Collection(x => x.Payments).Load();
+                    context.Entry(user).Collection(x => x.Moves).Load();
+                    context.Entry(user).Collection(x => x.Accounts).Load();
+                    context.Entry(user).Collection(x => x.CreditCards).Load();
+
+                    this.Incomes = new ObservableCollection<Income>(user.Incomes);
+                    this.Payments = new ObservableCollection<Payment>(user.Payments);
+                    this.Moves = new ObservableCollection<Move>(user.Moves);
+                    this.Accounts = new ObservableCollection<Account>(user.Accounts);
+                    this.CreditCards = new ObservableCollection<CreditCard>(user.CreditCards);
+                }
 
                 context.SaveChangesAsync();
             }

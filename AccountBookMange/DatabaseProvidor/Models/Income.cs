@@ -222,6 +222,10 @@ namespace DatabaseProvidor.Models
                     this.Comment = income.Comment;
 
                     this.IsValuable = true;
+
+                    context.Entry(income).Reference(x => x.Account).Load();
+
+                    this.Account = income.Account;
                 }
 
                 context.SaveChangesAsync();

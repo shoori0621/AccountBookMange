@@ -258,6 +258,12 @@ namespace DatabaseProvidor.Models
                     this.Comment = payment.Comment;
 
                     this.IsValuable = true;
+
+                    context.Entry(payment).Reference(x => x.Account).Load();
+                    context.Entry(payment).Reference(x => x.CreditCard).Load();
+
+                    this.Account = payment.Account;
+                    this.CreditCard = payment.CreditCard;
                 }
 
                 context.SaveChangesAsync();

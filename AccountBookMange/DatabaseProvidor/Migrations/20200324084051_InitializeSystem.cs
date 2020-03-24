@@ -30,14 +30,15 @@ namespace DatabaseProvidor.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     user_id = table.Column<long>(nullable: false),
                     name = table.Column<string>(nullable: true),
-                    delete_flag = table.Column<long>(nullable: true)
+                    delete_flag = table.Column<long>(nullable: true),
+                    Account_id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_account", x => x.id);
                     table.ForeignKey(
-                        name: "FK_account_user_user_id",
-                        column: x => x.user_id,
+                        name: "FK_account_user_Account_id",
+                        column: x => x.Account_id,
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -51,14 +52,15 @@ namespace DatabaseProvidor.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     user_id = table.Column<long>(nullable: false),
                     name = table.Column<string>(nullable: true),
-                    delete_flag = table.Column<long>(nullable: true)
+                    delete_flag = table.Column<long>(nullable: true),
+                    CreditCard_id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_credit_card", x => x.id);
                     table.ForeignKey(
-                        name: "FK_credit_card_user_user_id",
-                        column: x => x.user_id,
+                        name: "FK_credit_card_user_CreditCard_id",
+                        column: x => x.CreditCard_id,
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -76,23 +78,24 @@ namespace DatabaseProvidor.Migrations
                     income_price = table.Column<long>(nullable: true),
                     account_id = table.Column<long>(nullable: true),
                     comment = table.Column<string>(nullable: true),
-                    account_id1 = table.Column<long>(nullable: true)
+                    account_id1 = table.Column<long>(nullable: true),
+                    Income_id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_income", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_income_user_user_id",
-                        column: x => x.user_id,
-                        principalTable: "user",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_income_account_account_id1",
                         column: x => x.account_id1,
                         principalTable: "account",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_income_user_Income_id",
+                        column: x => x.Income_id,
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,17 +112,18 @@ namespace DatabaseProvidor.Migrations
                     move_price = table.Column<long>(nullable: true),
                     comment = table.Column<string>(nullable: true),
                     pre_account_id1 = table.Column<long>(nullable: true),
-                    next_account_id1 = table.Column<long>(nullable: true)
+                    next_account_id1 = table.Column<long>(nullable: true),
+                    Move_id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_move", x => x.id);
                     table.ForeignKey(
-                        name: "FK_move_user_user_id",
-                        column: x => x.user_id,
+                        name: "FK_move_user_Move_id",
+                        column: x => x.Move_id,
                         principalTable: "user",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_move_account_next_account_id1",
                         column: x => x.next_account_id1,
@@ -149,17 +153,12 @@ namespace DatabaseProvidor.Migrations
                     card_id = table.Column<long>(nullable: true),
                     comment = table.Column<string>(nullable: true),
                     account_id1 = table.Column<long>(nullable: true),
-                    card_id1 = table.Column<long>(nullable: true)
+                    card_id1 = table.Column<long>(nullable: true),
+                    Payment_id = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_payment", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_payment_user_user_id",
-                        column: x => x.user_id,
-                        principalTable: "user",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_payment_account_account_id1",
                         column: x => x.account_id1,
@@ -172,22 +171,23 @@ namespace DatabaseProvidor.Migrations
                         principalTable: "credit_card",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_payment_user_Payment_id",
+                        column: x => x.Payment_id,
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_account_user_id",
+                name: "IX_account_Account_id",
                 table: "account",
-                column: "user_id");
+                column: "Account_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_credit_card_user_id",
+                name: "IX_credit_card_CreditCard_id",
                 table: "credit_card",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_income_user_id",
-                table: "income",
-                column: "user_id");
+                column: "CreditCard_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_income_account_id1",
@@ -195,9 +195,14 @@ namespace DatabaseProvidor.Migrations
                 column: "account_id1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_move_user_id",
+                name: "IX_income_Income_id",
+                table: "income",
+                column: "Income_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_move_Move_id",
                 table: "move",
-                column: "user_id");
+                column: "Move_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_move_next_account_id1",
@@ -210,11 +215,6 @@ namespace DatabaseProvidor.Migrations
                 column: "pre_account_id1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_payment_user_id",
-                table: "payment",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_payment_account_id1",
                 table: "payment",
                 column: "account_id1");
@@ -223,6 +223,11 @@ namespace DatabaseProvidor.Migrations
                 name: "IX_payment_card_id1",
                 table: "payment",
                 column: "card_id1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_payment_Payment_id",
+                table: "payment",
+                column: "Payment_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
