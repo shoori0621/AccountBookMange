@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DatabaseProvidor.Accesses;
+using System.Collections.ObjectModel;
 
 namespace DatabaseProvidor.Models
 {
@@ -93,7 +94,16 @@ namespace DatabaseProvidor.Models
             }
         }
 
-        public User() { }
+        public ObservableCollection<Income> Incomes { get; set; }
+        public ObservableCollection<Payment> Payments { get; set; }
+        public ObservableCollection<Move> Moves { get; set; }
+
+        public User()
+        {
+            this.Incomes = new ObservableCollection<Income>();
+            this.Payments = new ObservableCollection<Payment>();
+            this.Moves = new ObservableCollection<Move>();
+        }
 
         public User(long id)
         {
@@ -154,7 +164,7 @@ namespace DatabaseProvidor.Models
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                var user = context.Users.Single(x => x.Id == id);
+                var user = context.Users.SingleOrDefault(x => x.Id == id);
                 if (user != null)
                 {
                     this.Id = user.Id;
@@ -165,6 +175,10 @@ namespace DatabaseProvidor.Models
 
                     this.IsValuable = true;
                 }
+
+                this.Incomes = new ObservableCollection<Income>(context.Incomes);
+                this.Payments = new ObservableCollection<Payment>(context.Payments);
+                this.Moves = new ObservableCollection<Move>(context.Moves);
 
                 context.SaveChangesAsync();
             }

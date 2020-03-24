@@ -14,49 +14,88 @@ namespace EditorViews.ViewModels
     {
         /// <summary>貯蓄額</summary>
         public ReactiveProperty<long> SavingPrice { get; set; }
-        
+
         /// <summary>前月比</summary>
         public ReactiveProperty<long> LastMonthDiffPrice { get; set; }
-        
+
         /// <summary>前年比</summary>
         public ReactiveProperty<long> LastYearDiffPrice { get; set; }
 
         /// <summary>収入履歴</summary>
-		public ReactiveCollection<Income> Incomes { get; }
+        public ReactiveCollection<Income> Incomes { get; }
 
         /// <summary>支出履歴</summary>
-		public ReactiveCollection<Payment> Payments { get; }
+        public ReactiveCollection<Payment> Payments { get; }
 
         /// <summary>移動履歴</summary>
-		public ReactiveCollection<Move> Moves { get; }
+        public ReactiveCollection<Move> Moves { get; }
+
+        private User User { get; set; }
 
         /// <summary>ReactivePropertyのDispose用リスト</summary>
         private System.Reactive.Disposables.CompositeDisposable disposables
             = new System.Reactive.Disposables.CompositeDisposable();
 
+        void System.IDisposable.Dispose() { this.disposables.Dispose(); }
+
         public MainMenuViewModel()
         {
+            this.SavingPrice = new ReactiveProperty<long>();
+            this.LastMonthDiffPrice = new ReactiveProperty<long>();
+            this.LastYearDiffPrice = new ReactiveProperty<long>();
+            this.Incomes = new ReactiveCollection<Income>();
+            this.Payments = new ReactiveCollection<Payment>();
+            this.Moves = new ReactiveCollection<Move>();
+        }
+                
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            this.User = new User((long)navigationContext.Parameters["UserId"]);
+
+            this.SetContent();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            //throw new NotImplementedException();
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            this.User = new User((long)navigationContext.Parameters["UserId"]);
+        }
+
+        /// <summary>
+        /// 画面へ表示する
+        /// </summary>
+        private void SetContent()
+        {
+            //収入、支払、移動を初期化
+            this.Incomes.Clear();
+            this.Payments.Clear();
+            this.Moves.Clear();
+
             //当日を取得
             var now = DateTime.Now.Date;
 
-            this.SavingPrice = new ReactiveProperty<long>(0);
-            this.LastMonthDiffPrice = new ReactiveProperty<long>(0);
-            this.LastYearDiffPrice = new ReactiveProperty<long>(0);
+            //this.SavingPrice = new ReactiveProperty<long>(0);
+            this.SavingPrice.Value = 0;
+            this.LastMonthDiffPrice.Value = 0;
+            this.LastYearDiffPrice.Value = 0;
 
-            var incomes = Income.FindByUserId(1);
-            var payments = Payment.FindByUserId(1);
-            var moves = Move.FindByUserId(1);
+            //var incomes = Income.FindByUserId(this.UserId);
+            //var payments = Payment.FindByUserId(this.UserId);
+            //var moves = Move.FindByUserId(this.UserId);
 
             long preMonthSavingPrice = 0;
             long preYearSavingPrice = 0;
 
             //収入の計算
-            foreach(var income in incomes)
+            foreach (var income in this.User.Incomes)
             {
-                //入金日を日付型に変換
-                DateTime incomeDate = DateTime.ParseExact(income.IncomeDate, "yyyy/MM/dd", null);
 
-                if(now >= incomeDate)
+                if (now >= income.DateTimeIncomeDate)
                 {
                     //入金日を迎えていれば加算する
                     this.SavingPrice.Value += (income.IncomePrice ?? 0);
@@ -64,7 +103,7 @@ namespace EditorViews.ViewModels
 
                 //前月比の計算
                 //入金日の年+月
-                int incomeYearMonth = incomeDate.Year + incomeDate.Month;
+                int incomeYearMonth = income.DateTimeIncomeDate.Value.Year + income.DateTimeIncomeDate.Value.Month;
                 //当日の年+月
                 int nowYearMonth = now.Year + now.Month;
 
@@ -75,21 +114,18 @@ namespace EditorViews.ViewModels
                 }
 
                 //前年以前であれば前年までの収入として加算
-                if(incomeDate.Year < now.Year)
+                if (income.DateTimeIncomeDate.Value.Year < now.Year)
                 {
                     preYearSavingPrice += (income.IncomePrice ?? 0);
                 }
 
-                this.Incomes.Add(income);
+                this.Incomes.AddOnScheduler(income);
             }
 
             //支出の計算
-            foreach (var payment in payments)
+            foreach (var payment in this.User.Payments)
             {
-                //支払日を日付型に変換
-                DateTime paymentDate = DateTime.ParseExact(payment.PaymentDate, "yyyy/MM/dd", null);
-
-                if(now >= paymentDate)
+                if (now >= payment.DateTimePaymentDate)
                 {
                     //支払日を迎えていれば差し引く
                     this.SavingPrice.Value -= (payment.PaymentPrice ?? 0);
@@ -97,7 +133,7 @@ namespace EditorViews.ViewModels
 
                 //前月比の計算
                 //入金日の年+月
-                int incomeYearMonth = paymentDate.Year + paymentDate.Month;
+                int incomeYearMonth = payment.DateTimePaymentDate.Value.Year + payment.DateTimePaymentDate.Value.Month;
                 //当日の年+月
                 int nowYearMonth = now.Year + now.Month;
 
@@ -108,42 +144,24 @@ namespace EditorViews.ViewModels
                 }
 
                 //前年以前であれば前年までの収入として加算
-                if (paymentDate.Year < now.Year)
+                if (payment.DateTimePaymentDate.Value.Year < now.Year)
                 {
                     preYearSavingPrice -= (payment.PaymentPrice ?? 0);
                 }
 
-                this.Payments.Add(payment);
+                this.Payments.AddOnScheduler(payment);
             }
 
             //移動
-            foreach (var move in moves)
+            foreach (var move in this.User.Moves)
             {
-                this.Moves.Add(move);
+                this.Moves.AddOnScheduler(move);
             }
 
             //前月比
             this.LastMonthDiffPrice.Value = this.SavingPrice.Value - preMonthSavingPrice;
             //前年比
             this.LastYearDiffPrice.Value = this.SavingPrice.Value - preYearSavingPrice;
-
-        }
-
-        void System.IDisposable.Dispose() { this.disposables.Dispose(); }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            throw new NotImplementedException();
         }
     }
 }

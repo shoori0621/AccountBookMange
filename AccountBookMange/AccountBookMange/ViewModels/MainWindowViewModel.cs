@@ -18,6 +18,9 @@ namespace AccountBookMange.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        /// <summary>ログインユーザID</summary>
+        private static long UserId { get; set; }
+
         /// <summary>TreeViewItem を取得します。</summary>
 		public ReadOnlyReactiveCollection<MenuItemViewModel> MenuItems { get; }
 
@@ -98,8 +101,12 @@ namespace AccountBookMange.ViewModels
                     viewName = "";
                     break;
             }
+            
+            UserId = 1;
+            var param = new NavigationParameters();
+            param.Add("UserId", UserId);
 
-            this.regionManager.RequestNavigate("EditorArea", viewName);
+            this.regionManager.RequestNavigate("EditorArea", viewName, param);
             
         }
 

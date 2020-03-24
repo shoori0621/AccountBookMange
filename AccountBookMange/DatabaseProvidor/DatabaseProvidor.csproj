@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountBookManage.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
     <None Include="packages.config" />

@@ -63,6 +63,28 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        /// <summary>
+        /// 移動開始日　日付型
+        /// </summary>
+        [NotMapped]
+        public DateTime? DateTimeStartDate
+        {
+            get
+            {
+                DateTime? result = null;
+                if (this.StartDate != null)
+                {
+                    result = DateTime.Parse(this.StartDate);
+                }
+
+                return result;
+            }
+            set
+            {
+                this.StartDate = value != null ? value.ToString() : null;
+            }
+        }
+
         private string endDate;
         /// <summary>移動完了日</summary>
         [Column("end_date")]
@@ -75,6 +97,28 @@ namespace DatabaseProvidor.Models
             set
             {
                 SetProperty(ref endDate, value);
+            }
+        }
+
+        /// <summary>
+        /// 移動完了日　日付型
+        /// </summary>
+        [NotMapped]
+        public DateTime? DateTimeEndDate
+        {
+            get
+            {
+                DateTime? result = null;
+                if (this.EndDate != null)
+                {
+                    result = DateTime.Parse(this.EndDate);
+                }
+
+                return result;
+            }
+            set
+            {
+                this.EndDate = value != null ? value.ToString() : null;
             }
         }
 
@@ -115,11 +159,11 @@ namespace DatabaseProvidor.Models
         {
             get
             {
-                return nextAccountId;
+                return movePrice;
             }
             set
             {
-                SetProperty(ref nextAccountId, value);
+                SetProperty(ref movePrice, value);
             }
         }
 
@@ -199,7 +243,7 @@ namespace DatabaseProvidor.Models
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                var move = context.Moves.Single(x => x.Id == id);
+                var move = context.Moves.SingleOrDefault(x => x.Id == id);
                 if (move != null)
                 {
                     this.Id = move.Id;

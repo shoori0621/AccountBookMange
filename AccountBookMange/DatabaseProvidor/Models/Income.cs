@@ -63,6 +63,28 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        /// <summary>
+        /// 入金日　日付型
+        /// </summary>
+        [NotMapped]
+        public DateTime? DateTimeIncomeDate
+        {
+            get
+            {
+                DateTime? result = null;
+                if(this.IncomeDate != null)
+                {
+                    result = DateTime.Parse(this.IncomeDate);
+                }
+
+                return result;
+            }
+            set
+            {
+                this.IncomeDate = value != null ? value.ToString() : null;
+            }
+        }
+
         private long? incomeKind;
         /// <summary>入金区分</summary>
         [Column("income_kind")]
@@ -185,7 +207,7 @@ namespace DatabaseProvidor.Models
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                var income = context.Incomes.Single(x => x.Id == id);
+                var income = context.Incomes.SingleOrDefault(x => x.Id == id);
                 if (income != null)
                 {
                     this.Id = income.Id;

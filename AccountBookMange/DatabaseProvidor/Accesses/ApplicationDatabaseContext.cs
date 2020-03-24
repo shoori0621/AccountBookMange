@@ -23,11 +23,12 @@ namespace DatabaseProvidor.Accesses
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string dataSource = Directory.GetCurrentDirectory() + @"\AccountBookManage.db";
             var connectionString =
                 new SqliteConnectionStringBuilder
                 {
                     //DataSource = @"E:\C#\AccountBookManage\AccountBookMange\DatabaseProvidor\AccountBookManage.db" 
-                    DataSource = @"C:\Users\tetsumoto\Documents\05.Lern\01.C#\prism\AccountBookManage\AccountBookMange\DatabaseProvidor\AccountBookManage.db"
+                    DataSource = dataSource
                 }.ToString();
 
             optionsBuilder.UseSqlite(new SqliteConnection(connectionString));

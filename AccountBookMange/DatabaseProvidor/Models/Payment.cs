@@ -63,6 +63,28 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        /// <summary>
+        /// 支払日　日付型
+        /// </summary>
+        [NotMapped]
+        public DateTime? DateTimePaymentDate
+        {
+            get
+            {
+                DateTime? result = null;
+                if (this.PaymentDate != null)
+                {
+                    result = DateTime.Parse(this.PaymentDate);
+                }
+
+                return result;
+            }
+            set
+            {
+                this.PaymentDate = value != null ? value.ToString() : null;
+            }
+        }
+
         private long? paymentPrice;
         /// <summary>支払額</summary>
         [Column("payment_price")]
@@ -216,7 +238,7 @@ namespace DatabaseProvidor.Models
         {
             using (var context = new ApplicationDatabaseContext())
             {
-                var payment = context.Payments.Single(x => x.Id == id);
+                var payment = context.Payments.SingleOrDefault(x => x.Id == id);
                 if (payment != null)
                 {
                     this.Id = payment.Id;

@@ -49,6 +49,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\AbsConveter.cs" />
+    <Compile Include="Commons\IsMinusConverter.cs" />
     <Compile Include="EditorViewsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
