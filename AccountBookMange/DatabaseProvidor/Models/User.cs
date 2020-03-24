@@ -97,12 +97,14 @@ namespace DatabaseProvidor.Models
         public ObservableCollection<Income> Incomes { get; set; }
         public ObservableCollection<Payment> Payments { get; set; }
         public ObservableCollection<Move> Moves { get; set; }
+        public ObservableCollection<Account> Accounts { get; set; }
+        public ObservableCollection<CreditCard> CreditCards { get; set; }
 
         public User()
         {
-            this.Incomes = new ObservableCollection<Income>();
-            this.Payments = new ObservableCollection<Payment>();
-            this.Moves = new ObservableCollection<Move>();
+            //this.Incomes = new ObservableCollection<Income>();
+            //this.Payments = new ObservableCollection<Payment>();
+            //this.Moves = new ObservableCollection<Move>();
         }
 
         public User(long id)
@@ -176,9 +178,9 @@ namespace DatabaseProvidor.Models
                     this.IsValuable = true;
                 }
 
-                this.Incomes = new ObservableCollection<Income>(context.Incomes);
-                this.Payments = new ObservableCollection<Payment>(context.Payments);
-                this.Moves = new ObservableCollection<Move>(context.Moves);
+                //this.Incomes = new ObservableCollection<Income>(context.Incomes);
+                //this.Payments = new ObservableCollection<Payment>(context.Payments);
+                //this.Moves = new ObservableCollection<Move>(context.Moves);
 
                 context.SaveChangesAsync();
             }

@@ -145,6 +145,9 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        [ForeignKey("account_id")]
+        public Account Account { get; set; }
+
         public Income() { }
 
         public Income(long id)

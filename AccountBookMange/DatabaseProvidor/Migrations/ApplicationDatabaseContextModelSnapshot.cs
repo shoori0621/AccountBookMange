@@ -37,6 +37,8 @@ namespace DatabaseProvidor.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("account");
                 });
 
@@ -60,6 +62,8 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("credit_card");
                 });
@@ -95,7 +99,15 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("account_id")
+                        .HasColumnName("account_id1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("account_id");
 
                     b.ToTable("income");
                 });
@@ -135,7 +147,21 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("next_account_id")
+                        .HasColumnName("next_account_id1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long?>("pre_account_id")
+                        .HasColumnName("pre_account_id1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("next_account_id");
+
+                    b.HasIndex("pre_account_id");
 
                     b.ToTable("move");
                 });
@@ -179,7 +205,21 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("account_id")
+                        .HasColumnName("account_id1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long?>("card_id")
+                        .HasColumnName("card_id1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("account_id");
+
+                    b.HasIndex("card_id");
 
                     b.ToTable("payment");
                 });
@@ -210,6 +250,65 @@ namespace DatabaseProvidor.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("DatabaseProvidor.Models.Account", b =>
+                {
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("Accounts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DatabaseProvidor.Models.CreditCard", b =>
+                {
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("CreditCards")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DatabaseProvidor.Models.Income", b =>
+                {
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("Incomes")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("DatabaseProvidor.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("account_id");
+                });
+
+            modelBuilder.Entity("DatabaseProvidor.Models.Move", b =>
+                {
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("Moves")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("DatabaseProvidor.Models.Account", "NextAccount")
+                        .WithMany()
+                        .HasForeignKey("next_account_id");
+
+                    b.HasOne("DatabaseProvidor.Models.Account", "PreAccount")
+                        .WithMany()
+                        .HasForeignKey("pre_account_id");
+                });
+
+            modelBuilder.Entity("DatabaseProvidor.Models.Payment", b =>
+                {
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("DatabaseProvidor.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("account_id");
+
+                    b.HasOne("DatabaseProvidor.Models.CreditCard", "CreditCard")
+                        .WithMany()
+                        .HasForeignKey("card_id");
                 });
 #pragma warning restore 612, 618
         }
