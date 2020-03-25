@@ -3,7 +3,112 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <TextBlock Text="収入登録・編集"/>
-    </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/EditorViews;component/EditorViewResourceDictionary.xaml"/>
+    </UserControl.Resources>
+
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+        <Border
+            BorderThickness="1"
+            BorderBrush="DimGray"
+            Background="{StaticResource BaseColor}"
+            HorizontalAlignment="Left"
+            Width="500"
+            Height="150">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Orientation="Vertical" Margin="20,0,0,0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="入金日" Style="{StaticResource ContentTitleLabel}"/>
+                            <DatePicker 
+                                BorderThickness="0"
+                                Width="110"
+                                VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                            <Label Content="区分" Style="{StaticResource ContentTitleLabel}"/>
+                            <ComboBox Width="100" Background="Black"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="入金額" Style="{StaticResource ContentTitleLabel}"/>
+                            <TextBox Width="110"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                            <Label Content="口座" Style="{StaticResource ContentTitleLabel}"/>
+                            <ComboBox Width="100"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <DockPanel Margin="0,5,0,0" Width="700">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="収入一覧"/>
+
+                <ListBox
+                    ItemsSource="{Binding Incomes}"
+                    Width="350"
+                    Height="350"
+                    Margin="0,5,0,0"
+                    ScrollViewer.CanContentScroll="False"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="Height" Value="25"/>
+                        </Style>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label 
+                                    Content="{Binding DateTimeIncomeDate}"
+                                    ContentStringFormat="yyyy/MM/dd"
+                                    Width="100"/>
+                                <Label Width="80">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IncomeKind}" Value="0">
+                                                    <Setter Property="Content" Value="給与"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IncomeKind}" Value="1">
+                                                    <Setter Property="Content" Value="賞与"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IncomeKind}" Value="2">
+                                                    <Setter Property="Content" Value="臨時収入"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IncomeKind}" Value="9">
+                                                    <Setter Property="Content" Value="その他"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                                <Label 
+                                    Content="{Binding IncomePrice}"
+                                    ContentStringFormat="#,0"
+                                    Width="80"/>
+                                <Button Content="×"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <Button 
+                Content="登録" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right"
+                Style="{StaticResource BaseButtonStyle}"/>
+                        
+
+        </DockPanel>
+
+    </StackPanel>
 </UserControl>

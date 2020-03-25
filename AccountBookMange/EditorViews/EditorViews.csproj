@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Commons\AbsConveter.cs" />
     <Compile Include="Commons\IsMinusConverter.cs" />
+    <Compile Include="Constants\ListDefine.cs" />
     <Compile Include="EditorViewsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -104,6 +105,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="EditorViewResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\IncomeEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

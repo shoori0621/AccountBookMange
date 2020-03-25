@@ -57,8 +57,7 @@ namespace EditorViews.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            //throw new NotImplementedException();
-            return true;
+            return false;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
