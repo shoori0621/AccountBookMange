@@ -26,6 +26,9 @@ namespace EditorViews.ViewModels
         /// <summary>入金一覧</summary>
         public ReactiveCollection<Income> Incomes { get; }
 
+        /// <summary>口座一覧</summary>
+        public ReactiveCollection<Account> Accounts { get; }
+
         /// <summary>ユーザ</summary>
         private User User { get; set; }
 
@@ -39,6 +42,7 @@ namespace EditorViews.ViewModels
             this.IncomeKind = new ReactiveProperty<long>();
             this.IncomePrice = new ReactiveProperty<long?>();
             this.AccountId = new ReactiveProperty<long>();
+            this.Accounts = new ReactiveCollection<Account>();
         }
 
         void System.IDisposable.Dispose() { this.disposables.Dispose(); }
@@ -46,6 +50,8 @@ namespace EditorViews.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             this.User = new User((long)navigationContext.Parameters["UserId"]);
+
+            this.Accounts.AddRangeOnScheduler(this.User.Accounts);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
