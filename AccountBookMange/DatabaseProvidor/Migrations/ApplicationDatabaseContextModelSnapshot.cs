@@ -35,13 +35,9 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("id")
-                        .HasColumnName("Account_id")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("account");
                 });
@@ -65,13 +61,9 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("id")
-                        .HasColumnName("CreditCard_id")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("credit_card");
                 });
@@ -107,19 +99,11 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("account_id")
-                        .HasColumnName("account_id1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("id")
-                        .HasColumnName("Income_id")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("account_id");
+                    b.HasIndex("AccountId");
 
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("income");
                 });
@@ -159,25 +143,13 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("id")
-                        .HasColumnName("Move_id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("next_account_id")
-                        .HasColumnName("next_account_id1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("pre_account_id")
-                        .HasColumnName("pre_account_id1")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("id");
+                    b.HasIndex("NextAccountId");
 
-                    b.HasIndex("next_account_id");
+                    b.HasIndex("PreAccountId");
 
-                    b.HasIndex("pre_account_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("move");
                 });
@@ -201,6 +173,9 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("comment")
                         .HasColumnType("TEXT");
 
+                    b.Property<long?>("CreditCardId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PaymentDate")
                         .HasColumnName("payment_date")
                         .HasColumnType("TEXT");
@@ -221,25 +196,13 @@ namespace DatabaseProvidor.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("account_id")
-                        .HasColumnName("account_id1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("card_id")
-                        .HasColumnName("card_id1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("id")
-                        .HasColumnName("Payment_id")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("account_id");
+                    b.HasIndex("AccountId");
 
-                    b.HasIndex("card_id");
+                    b.HasIndex("CreditCardId");
 
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("payment");
                 });
@@ -276,7 +239,7 @@ namespace DatabaseProvidor.Migrations
                 {
                     b.HasOne("DatabaseProvidor.Models.User", null)
                         .WithMany("Accounts")
-                        .HasForeignKey("id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -285,7 +248,7 @@ namespace DatabaseProvidor.Migrations
                 {
                     b.HasOne("DatabaseProvidor.Models.User", null)
                         .WithMany("CreditCards")
-                        .HasForeignKey("id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -294,47 +257,41 @@ namespace DatabaseProvidor.Migrations
                 {
                     b.HasOne("DatabaseProvidor.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("account_id");
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("DatabaseProvidor.Models.User", null)
                         .WithMany("Incomes")
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DatabaseProvidor.Models.Move", b =>
                 {
-                    b.HasOne("DatabaseProvidor.Models.User", null)
-                        .WithMany("Moves")
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DatabaseProvidor.Models.Account", "NextAccount")
                         .WithMany()
-                        .HasForeignKey("next_account_id");
+                        .HasForeignKey("NextAccountId");
 
                     b.HasOne("DatabaseProvidor.Models.Account", "PreAccount")
                         .WithMany()
-                        .HasForeignKey("pre_account_id");
+                        .HasForeignKey("PreAccountId");
+
+                    b.HasOne("DatabaseProvidor.Models.User", null)
+                        .WithMany("Moves")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DatabaseProvidor.Models.Payment", b =>
                 {
                     b.HasOne("DatabaseProvidor.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("account_id");
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("DatabaseProvidor.Models.CreditCard", "CreditCard")
                         .WithMany()
-                        .HasForeignKey("card_id");
+                        .HasForeignKey("CreditCardId");
 
                     b.HasOne("DatabaseProvidor.Models.User", null)
                         .WithMany("Payments")
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

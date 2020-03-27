@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DatabaseProvidor.Accesses;
+using Prism.Commands;
 
 namespace DatabaseProvidor.Models
 {
@@ -81,7 +82,7 @@ namespace DatabaseProvidor.Models
             }
             set
             {
-                this.IncomeDate = value != null ? value.ToString() : null;
+                this.IncomeDate = value != null ? value.Value.ToString("yyyy/MM/dd") : null;
             }
         }
 
@@ -145,12 +146,18 @@ namespace DatabaseProvidor.Models
             }
         }
 
-        [ForeignKey("account_id")]
         public Account Account { get; set; }
 
-        public Income() { }
+        [NotMapped]
+        /// <summary>削除</summary>
+        public DelegateCommand DeleteCommand { get; set; }
 
-        public Income(long id)
+        public Income()
+        {
+            this.Account = new Account();            
+        }
+
+        public Income(long id) : this()
         {
             this.FindByKey(id);
         }
@@ -180,7 +187,7 @@ namespace DatabaseProvidor.Models
                     data.Comment = this.Comment;
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

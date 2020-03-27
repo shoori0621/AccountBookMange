@@ -94,15 +94,10 @@ namespace DatabaseProvidor.Models
             }
         }
 
-        [ForeignKey("id")]
         public ObservableCollection<Income> Incomes { get; set; }
-        [ForeignKey("id")]
         public ObservableCollection<Payment> Payments { get; set; }
-        [ForeignKey("id")]
         public ObservableCollection<Move> Moves { get; set; }
-        [ForeignKey("id")]
         public ObservableCollection<Account> Accounts { get; set; }
-        [ForeignKey("id")]
         public ObservableCollection<CreditCard> CreditCards { get; set; }
 
         public User()
@@ -141,7 +136,7 @@ namespace DatabaseProvidor.Models
                     data.DeleteFlag = this.DeleteFlag;
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

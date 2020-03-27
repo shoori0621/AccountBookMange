@@ -109,7 +109,7 @@ namespace DatabaseProvidor.Models
                     data.Name = this.Name;
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

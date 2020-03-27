@@ -181,10 +181,8 @@ namespace DatabaseProvidor.Models
             }
         }
 
-        [ForeignKey("pre_account_id")]
         public Account PreAccount { get; set; }
 
-        [ForeignKey("next_account_id")]
         public Account NextAccount { get; set; }
 
         public Move() { }
@@ -220,7 +218,7 @@ namespace DatabaseProvidor.Models
                     data.Comment = this.Comment;
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

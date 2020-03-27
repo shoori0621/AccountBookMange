@@ -174,10 +174,8 @@ namespace DatabaseProvidor.Models
             }
         }
 
-        [ForeignKey("account_id")]
         public Account Account { get; set; }
 
-        [ForeignKey("card_id")]
         public CreditCard CreditCard { get; set; }
 
         public Payment() { }
@@ -214,7 +212,7 @@ namespace DatabaseProvidor.Models
                     data.Comment = this.Comment;
                 }
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

@@ -4,6 +4,7 @@ using Prism.Modularity;
 using System.Windows;
 
 using EditorViews;
+using DialogService;
 
 namespace AccountBookMange
 {
@@ -25,6 +26,7 @@ namespace AccountBookMange
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<EditorViewsModule>();
+            moduleCatalog.AddModule<DialogServiceModule>();
         }
     }
 }

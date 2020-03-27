@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvidor", "Databas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorViews", "EditorViews\EditorViews.csproj", "{61B87609-0D45-440C-927B-4AAF9C947698}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DialogService", "DialogService\DialogService.csproj", "{36B42537-6228-4C67-B518-0A059B70C0B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{61B87609-0D45-440C-927B-4AAF9C947698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61B87609-0D45-440C-927B-4AAF9C947698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61B87609-0D45-440C-927B-4AAF9C947698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B42537-6228-4C67-B518-0A059B70C0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B42537-6228-4C67-B518-0A059B70C0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B42537-6228-4C67-B518-0A059B70C0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B42537-6228-4C67-B518-0A059B70C0B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

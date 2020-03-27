@@ -14,7 +14,7 @@ namespace EditorViews.Constants
         public class DefineItem
         {
             public string content { get; set; }
-            public int? value { get; set; }
+            public long? value { get; set; }
         }
 
         /// <summary>

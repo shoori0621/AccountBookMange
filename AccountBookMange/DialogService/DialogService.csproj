@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{61B87609-0D45-440C-927B-4AAF9C947698}</ProjectGuid>
+    <ProjectGuid>{36B42537-6228-4C67-B518-0A059B70C0B3}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EditorViews</RootNamespace>
-    <AssemblyName>EditorViews</AssemblyName>
+    <RootNamespace>DialogService</RootNamespace>
+    <AssemblyName>DialogService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,10 +49,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commons\AbsConveter.cs" />
-    <Compile Include="Commons\IsMinusConverter.cs" />
-    <Compile Include="Constants\ListDefine.cs" />
-    <Compile Include="EditorViewsModule.cs" />
+    <Compile Include="DialogServiceExtensions.cs" />
+    <Compile Include="DialogServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,33 +64,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\IncomeEditorViewModel.cs" />
-    <Compile Include="ViewModels\LoginMenuViewModel.cs" />
-    <Compile Include="ViewModels\MainMenuViewModel.cs" />
-    <Compile Include="ViewModels\MoveEditorViewModel.cs" />
-    <Compile Include="ViewModels\PaymentEditorViewModel.cs" />
-    <Compile Include="ViewModels\UserEditorViewModel.cs" />
-    <Compile Include="ViewModels\UserMasterViewModel.cs" />
-    <Compile Include="Views\IncomeEditor.xaml.cs">
-      <DependentUpon>IncomeEditor.xaml</DependentUpon>
+    <Compile Include="ViewModels\OKDialogViewModel.cs" />
+    <Compile Include="ViewModels\YesNoDialogViewModel.cs" />
+    <Compile Include="Views\OKDialog.xaml.cs">
+      <DependentUpon>OKDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginMenu.xaml.cs">
-      <DependentUpon>LoginMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MoveEditor.xaml.cs">
-      <DependentUpon>MoveEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PaymentEditor.xaml.cs">
-      <DependentUpon>PaymentEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserEditor.xaml.cs">
-      <DependentUpon>UserEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserMaster.xaml.cs">
-      <DependentUpon>UserMaster.xaml</DependentUpon>
+    <Compile Include="Views\YesNoDialog.xaml.cs">
+      <DependentUpon>YesNoDialog.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -105,35 +83,15 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EditorViewResourceDictionary.xaml">
+    <Page Include="DialogServiceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IncomeEditor.xaml">
+    <Page Include="Views\OKDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MoveEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PaymentEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserMaster.xaml">
+    <Page Include="Views\YesNoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,16 +101,6 @@
     <PackageReference Include="ReactiveProperty">
       <Version>6.2.0</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DatabaseProvidor\DatabaseProvidor.csproj">
-      <Project>{0cb61ff3-81a0-4a71-967f-dee64e0110df}</Project>
-      <Name>DatabaseProvidor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DialogService\DialogService.csproj">
-      <Project>{36b42537-6228-4c67-b518-0a059b70c0b3}</Project>
-      <Name>DialogService</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

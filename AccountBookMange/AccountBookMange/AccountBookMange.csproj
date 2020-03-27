@@ -119,6 +119,10 @@
       <Project>{0cb61ff3-81a0-4a71-967f-dee64e0110df}</Project>
       <Name>DatabaseProvidor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DialogService\DialogService.csproj">
+      <Project>{36b42537-6228-4c67-b518-0a059b70c0b3}</Project>
+      <Name>DialogService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EditorViews\EditorViews.csproj">
       <Project>{61b87609-0d45-440c-927b-4aaf9c947698}</Project>
       <Name>EditorViews</Name>
