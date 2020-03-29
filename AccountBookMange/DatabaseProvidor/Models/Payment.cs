@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DatabaseProvidor.Accesses;
+using Prism.Commands;
 
 namespace DatabaseProvidor.Models
 {
@@ -177,6 +178,10 @@ namespace DatabaseProvidor.Models
         public Account Account { get; set; }
 
         public CreditCard CreditCard { get; set; }
+
+        [NotMapped]
+        /// <summary>削除</summary>
+        public DelegateCommand DeleteCommand { get; set; }
 
         public Payment() { }
 

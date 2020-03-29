@@ -179,9 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accesses\ApplicationDatabaseContext.cs" />
-    <Compile Include="Migrations\20200327083211_SystemInitialize.cs" />
-    <Compile Include="Migrations\20200327083211_SystemInitialize.designer.cs">
-      <DependentUpon>20200327083211_SystemInitialize.cs</DependentUpon>
+    <Compile Include="Migrations\20200328125549_SystemInitialize.cs" />
+    <Compile Include="Migrations\20200328125549_SystemInitialize.designer.cs">
+      <DependentUpon>20200328125549_SystemInitialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDatabaseContextModelSnapshot.cs" />
     <Compile Include="Models\Account.cs" />
@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountBookManage.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
     <None Include="packages.config" />

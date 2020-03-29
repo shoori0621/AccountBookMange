@@ -154,7 +154,7 @@ namespace DatabaseProvidor.Models
 
         public Income()
         {
-            this.Account = new Account();            
+            
         }
 
         public Income(long id) : this()

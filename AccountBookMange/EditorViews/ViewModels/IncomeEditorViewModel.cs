@@ -29,10 +29,7 @@ namespace EditorViews.ViewModels
 
         /// <summary>備考</summary>
         public ReactiveProperty<string> Comment { get; set; }
-
-        /// <summary>選択した収入</summary>
-        public ReactiveProperty<Income> SelectedIncome { get; set; }
-
+                
         /// <summary>入金一覧</summary>
         public ReactiveCollection<Income> Incomes { get; } = new ReactiveCollection<Income>();
 
@@ -59,7 +56,6 @@ namespace EditorViews.ViewModels
             this.AccountId = new ReactiveProperty<long>();
             this.Accounts = new ReactiveCollection<Account>();
             this.Comment = new ReactiveProperty<string>();
-            this.SelectedIncome = new ReactiveProperty<Income>();
 
             this.RegistrationCommand = new ReactiveCommand().AddTo(this.disposables);
             this.RegistrationCommand.Subscribe(() => this.Registration());
@@ -96,7 +92,7 @@ namespace EditorViews.ViewModels
 
             foreach(var income in this.User.Incomes)
             {
-                income.DeleteCommand = new DelegateCommand(() => { this.Delete(); });
+                income.DeleteCommand = new DelegateCommand(() => { this.Delete(income); });
                 this.Incomes.Add(income);
             }
 
@@ -134,6 +130,7 @@ namespace EditorViews.ViewModels
 
             //入金登録処理
             var income = new Income();
+            income.DeleteCommand = new DelegateCommand(() => { this.Delete(income); });
             income.UserId = this.User.Id;
             income.DateTimeIncomeDate = this.IncomeDate.Value;
             income.IncomeKind = this.IncomeKind.Value;            
@@ -176,6 +173,11 @@ namespace EditorViews.ViewModels
                 result = false;
             }
 
+            if(result && this.AccountId.Value == 0)
+            {
+                result = false;
+            }
+
             if (!result)
             {
                 DialogServiceExtensions.ShowOKDialog(this.dialogService, "入力に誤りがあります");
@@ -189,7 +191,7 @@ namespace EditorViews.ViewModels
         /// <summary>
         /// 削除
         /// </summary>
-        private void Delete()
+        private void Delete(Income income)
         {
             var result = DialogServiceExtensions.ShowYesNoDialog(this.dialogService, "削除します\nよろしいですか?");
 
@@ -198,7 +200,8 @@ namespace EditorViews.ViewModels
                 return;
             }
 
-            this.SelectedIncome.Value.Delete();
+            income.Delete();
+            this.Incomes.Remove(income);
         }
     }
 }
