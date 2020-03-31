@@ -13,7 +13,7 @@
 
     <!--項目タイトル-->
     <Style x:Key="ContentTitleLabel" TargetType="Label">
-        <Setter Property="Width" Value="50"/>
+        <Setter Property="Width" Value="80"/>
         <Setter Property="Height" Value="25"/>        
     </Style>
 

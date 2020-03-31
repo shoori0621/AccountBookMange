@@ -104,7 +104,7 @@ namespace EditorViews.ViewModels
             this.PaymentPrice.Value = null;
             this.PaymentDate.Value = DateTime.Now.Date;
             this.PaymentKind.Value = 0;
-            this.AccountId.Value = 0;
+            this.AccountId.Value = 1;
             this.Comment.Value = null;
         }
 
@@ -148,7 +148,7 @@ namespace EditorViews.ViewModels
             this.PaymentPrice.Value = null;
             this.PaymentDate.Value = DateTime.Now.Date;
             this.PaymentKind.Value = 0;
-            this.AccountId.Value = 0;
+            this.AccountId.Value = 1;
             this.Comment.Value = null;
             this.Payments.Insert(0, payment);
 

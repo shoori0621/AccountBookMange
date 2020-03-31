@@ -216,7 +216,7 @@
 
                 <ListBox
                     ItemsSource="{Binding Moves}"
-                    Width="300"
+                    Width="380"
                     Height="350"
                     Margin="0,5,0,0"
                     ScrollViewer.CanContentScroll="False"
@@ -234,7 +234,7 @@
                                     Content="{Binding DateTimeStartDate}"
                                     ContentStringFormat="yyyy/MM/dd"
                                     Width="100"/>
-                                <StackPanel Width="150">
+                                <StackPanel Width="150" Orientation="Horizontal">
                                     <Label
                                         Content="{Binding PreAccount.Name}"
                                         Width="60"/>

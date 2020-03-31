@@ -101,7 +101,7 @@ namespace EditorViews.ViewModels
             this.IncomePrice.Value = null;
             this.IncomeDate.Value = DateTime.Now.Date;
             this.IncomeKind.Value = 0;
-            this.AccountId.Value = 0;
+            this.AccountId.Value = 1;
             this.Comment.Value = null;
         }
         
@@ -144,7 +144,7 @@ namespace EditorViews.ViewModels
             this.IncomePrice.Value = null;
             this.IncomeDate.Value = DateTime.Now.Date;
             this.IncomeKind.Value = 0;
-            this.AccountId.Value = 0;
+            this.AccountId.Value = 1;
             this.Comment.Value = null;
             this.Incomes.Insert(0, income);
 

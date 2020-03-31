@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DatabaseProvidor.Accesses;
+using Prism.Commands;
 
 namespace DatabaseProvidor.Models
 {
@@ -184,6 +185,10 @@ namespace DatabaseProvidor.Models
         public Account PreAccount { get; set; }
 
         public Account NextAccount { get; set; }
+
+        [NotMapped]
+        /// <summary>削除コマンド</summary>
+        public DelegateCommand DeleteCommand { get; set; }
 
         public Move() { }
 
