@@ -112,6 +112,11 @@ namespace DatabaseProvidor.Models
             this.FindByKey(id);
         }
 
+        public User(string account, string password)
+        {
+
+        }
+
         /// <summary>
         /// 登録・更新
         /// </summary>
@@ -206,5 +211,25 @@ namespace DatabaseProvidor.Models
             }
         }
 
+        /// <summary>
+        /// ログイン
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static User Login(string account, string password)
+        {
+            var users = FindAll();
+            var searchUser = users.Where(x => x.Account == account && x.Password == password);
+
+            if(searchUser.Count() > 0)
+            {
+                return searchUser.First();
+            }
+            else
+            {
+                return new User();
+            }
+        }
     }
 }

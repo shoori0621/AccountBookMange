@@ -1,9 +1,32 @@
 ﻿<UserControl x:Class="EditorViews.Views.LoginMenu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:EditorViews.Commons"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <TextBlock Text="ログイン"/>
-    </Grid>
+    
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/EditorViews;component/EditorViewResourceDictionary.xaml"/>
+    </UserControl.Resources>
+
+    <Border 
+        Background="{StaticResource BaseColor}"
+        Height="200" Width="500">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="アカウント" Style="{StaticResource ContentTitleLabel}"/>
+                <TextBox Width="100" Text="{Binding Account.Value}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="パスワード" Style="{StaticResource ContentTitleLabel}"/>
+                <PasswordBox Width="100" common:PasswordBoxHelper.Password="{Binding Password.Value}">
+                    <i:Interaction.Behaviors>
+                        <common:PasswordBoxBehavior/>
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+    
 </UserControl>
